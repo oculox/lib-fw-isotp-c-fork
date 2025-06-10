@@ -28,6 +28,12 @@
 #define __builtin_bswap64 _byteswap_uint64
 #endif
 
+#ifdef DESKTOP_SIMULATOR_ENVIRONMENT
+typedef uint8_t BITFIELD_T;
+#else
+typedef uint32_t BITFIELD_T;
+#endif
+
 /**************************************************************
  * internal used defines
  *************************************************************/
@@ -63,33 +69,33 @@ typedef enum {
 /* can fram defination */
 #if defined(ISOTP_BYTE_ORDER_LITTLE_ENDIAN)
 typedef struct {
-    uint32_t reserve_1:4;
-    uint32_t type:4;
+    BITFIELD_T reserve_1:4;
+    BITFIELD_T type:4;
     uint8_t reserve_2[7];
 } IsoTpPciType;
 
 typedef struct {
-    uint32_t SF_DL:4;
-    uint32_t type:4;
+    BITFIELD_T SF_DL:4;
+    BITFIELD_T type:4;
     uint8_t data[7];
 } IsoTpSingleFrame;
 
 typedef struct {
-    uint32_t FF_DL_high:4;
-    uint32_t type:4;
+    BITFIELD_T FF_DL_high:4;
+    BITFIELD_T type:4;
     uint8_t FF_DL_low;
     uint8_t data[6];
 } IsoTpFirstFrame;
 
 typedef struct {
-    uint32_t SN:4;
-    uint32_t type:4;
+    BITFIELD_T SN:4;
+    BITFIELD_T type:4;
     uint8_t data[7];
 } IsoTpConsecutiveFrame;
 
 typedef struct {
-    uint32_t FS:4;
-    uint32_t type:4;
+    BITFIELD_T FS:4;
+    BITFIELD_T type:4;
     uint8_t BS;
     uint8_t STmin;
     uint8_t reserve[5];
@@ -98,8 +104,8 @@ typedef struct {
 #else
 
 typedef struct {
-    uint32_t type:4;
-    uint32_t reserve_1:4;
+    BITFIELD_T type:4;
+    BITFIELD_T reserve_1:4;
     uint8_t reserve_2[7];
 } IsoTpPciType;
 
@@ -114,8 +120,8 @@ typedef struct {
 * +-------------+-----------+-----+
 */
 typedef struct {
-    uint32_t type:4;
-    uint32_t SF_DL:4;
+    BITFIELD_T type:4;
+    BITFIELD_T SF_DL:4;
     uint8_t data[7];
 } IsoTpSingleFrame;
 
@@ -130,8 +136,8 @@ typedef struct {
 * +-------------+-----------+-----------------------+-----+
 */
 typedef struct {
-    uint32_t type:4;
-    uint32_t FF_DL_high:4;
+    BITFIELD_T type:4;
+    BITFIELD_T FF_DL_high:4;
     uint8_t FF_DL_low;
     uint8_t data[6];
 } IsoTpFirstFrame;
@@ -147,8 +153,8 @@ typedef struct {
 * +-------------+-----------+-----+
 */
 typedef struct {
-    uint32_t type:4;
-    uint32_t SN:4;
+    BITFIELD_T type:4;
+    BITFIELD_T SN:4;
     uint8_t data[7];
 } IsoTpConsecutiveFrame;
 
@@ -163,8 +169,8 @@ typedef struct {
 * +-------------+-----------+-----------------------+-----------------------+-----+
 */
 typedef struct {
-    uint32_t type:4;
-    uint32_t FS:4;
+    BITFIELD_T type:4;
+    BITFIELD_T FS:4;
     uint8_t BS;
     uint8_t STmin;
     uint8_t reserve[5];
